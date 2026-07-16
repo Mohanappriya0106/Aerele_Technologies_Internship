@@ -2,7 +2,7 @@
 
 ## Objective
 
-This exercise demonstrates the Python concepts learned during Day 1 of the Aerele Internship.
+This exercise demonstrates the Python concepts learned during Day 1 of the Internship.
 
 ## Concepts Covered
 
