@@ -1,4 +1,4 @@
-# Aerele Internship
+# Aerele Technologies Internship
 
 This repository contains my internship assignments and learning progress at **Aerele Technologies**.
 
