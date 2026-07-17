@@ -6,9 +6,11 @@ MEDIUM_DISCOUNT_THRESHOLD = 2000
 HIGH_DISCOUNT_RATE = 0.20
 MEDIUM_DISCOUNT_RATE = 0.10
 
-"""Validate the structure and contents of an order.
-    Raises ValueError if required fields are missing or item values are invalid."""
 def validate_order(order: dict[str, Any]) -> None:
+    """
+        Validate the structure and contents of an order.
+        Raises ValueError if required fields are missing or item values are invalid.
+    """
     
     if "customer" not in order:
         raise ValueError("Customer is required.")
@@ -23,14 +25,17 @@ def validate_order(order: dict[str, Any]) -> None:
         if item["quantity"] <= 0:
             raise ValueError("Quantity must be greater than zero.")
 
-"""Calculate the subtotal for all items.Total price before discounts and tax."""
 def calculate_subtotal(items: list[dict[str, Any]]) -> float:
+    """
+        Calculate the subtotal for all items.Total price before discounts and tax.
+    """
     return sum(item["price"] * item["quantity"] for item in items)
 
-"""Calculate discount based on subtotal.
-    Returns Discount amount."""
 def calculate_discount(subtotal: float) -> float:
-    
+    """
+        Calculate discount based on subtotal.
+        Returns Discount amount.
+    """
     if subtotal >= HIGH_DISCOUNT_THRESHOLD:
         return subtotal * HIGH_DISCOUNT_RATE
 
@@ -39,14 +44,18 @@ def calculate_discount(subtotal: float) -> float:
 
     return 0.0
 
-"""Calculate GST on the taxable amount.
-    Returns Tax amount."""
 def calculate_tax(amount: float) -> float:
+    """
+        Calculate GST on the taxable amount.
+        Returns Tax amount.
+    """
     return amount * TAX_RATE
 
-"""Construct the invoice dictionary.
-    Returns Final invoice."""
 def build_invoice(customer: str,subtotal: float,discount: float,tax: float) -> dict[str, float | str]:
+    """
+        Construct the invoice dictionary.
+        Returns Final invoice.
+    """
     total = subtotal - discount + tax
 
     return {
@@ -57,8 +66,10 @@ def build_invoice(customer: str,subtotal: float,discount: float,tax: float) -> d
         "total": round(total, 2),
     }
 
-"""Display the invoice in a readable format."""
 def print_invoice(invoice: dict[str, float | str]) -> None:
+    """
+        Display the invoice in a readable format.
+    """
     print("=" * 30)
     print("INVOICE")
     print("=" * 30)
@@ -69,9 +80,11 @@ def print_invoice(invoice: dict[str, float | str]) -> None:
     print(f"Tax      : {invoice['tax']}")
     print(f"Total    : {invoice['total']}")
 
-"""Process an order from validation through invoice generation.
-    Returns Final invoice."""
 def process_order(order: dict[str, Any]) -> dict[str, float | str]:
+    """
+        Process an order from validation through invoice generation.
+        Returns Final invoice.
+    """
     validate_order(order)
 
     subtotal = calculate_subtotal(order["items"])
